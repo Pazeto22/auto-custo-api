@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('workshop_id')->constrained('workshops')->cascadeOnDelete();
+            $table->string('name');
             $table->string('phone')->nullable();
             $table->enum('rank', ['master', 'adm', 'MOD', 'default'])->default('default');
             $table->text('more_information')->nullable();
+            $table->string('email')->unique();
+            $table->string('password')->encrypted();
             $table->timestamps();
         });
     }
