@@ -32,7 +32,7 @@ O AutoCusto é um sistema web desenvolvido em Laravel para auxiliar oficinas mec
 -   `PUT    /api/workshops/{workshop}/users/{user}` — Atualiza usuário
 -   `DELETE /api/workshops/{workshop}/users/{user}` — Remove usuário
 
-#### Filtros e buscas:
+##### Filtros e buscas:
 
 -   `?q=termo` — Busca por nome, email ou telefone
 -   `?per_page=10` — Paginação
@@ -45,7 +45,7 @@ O AutoCusto é um sistema web desenvolvido em Laravel para auxiliar oficinas mec
 -   `PUT    /api/workshops/{workshop}/clients/{client}` — Atualiza cliente
 -   `DELETE /api/workshops/{workshop}/clients/{client}` — Remove cliente
 
-#### Filtros e buscas:
+##### Filtros e buscas:
 
 -   `?q=termo` — Busca por nome, telefone ou email
 -   `?per_page=10` — Paginação
@@ -58,7 +58,7 @@ O AutoCusto é um sistema web desenvolvido em Laravel para auxiliar oficinas mec
 -   `PUT    /api/clients/{client}/vehicles/{vehicle}` — Atualiza veículo
 -   `DELETE /api/clients/{client}/vehicles/{vehicle}` — Remove veículo
 
-#### Filtros e buscas:
+##### Filtros e buscas:
 
 -   `?q=termo` — Busca por marca, modelo ou placa
 -   `?per_page=10` — Paginação
@@ -71,7 +71,7 @@ O AutoCusto é um sistema web desenvolvido em Laravel para auxiliar oficinas mec
 -   `PUT    /api/products/{product}` — Atualiza produto
 -   `DELETE /api/products/{product}` — Remove produto
 
-#### Filtros e buscas:
+##### Filtros e buscas:
 
 -   `?q=termo` — Busca por nome ou descrição
 -   `?type=service|part` — Filtra por tipo
@@ -87,7 +87,7 @@ O AutoCusto é um sistema web desenvolvido em Laravel para auxiliar oficinas mec
 -   `PUT    /api/budgets/{budget}` — Atualiza orçamento
 -   `DELETE /api/budgets/{budget}` — Remove orçamento
 
-#### Filtros e buscas:
+##### Filtros e buscas:
 
 -   `?client_id=ID` — Filtra por cliente
 -   `?vehicle_id=ID` — Filtra por veículo
@@ -110,29 +110,3 @@ O AutoCusto é um sistema web desenvolvido em Laravel para auxiliar oficinas mec
 -   Todas as operações de criação e atualização validam os dados enviados.
 -   Os relacionamentos são respeitados em todas as operações (ex: só é possível acessar clientes de uma oficina, veículos de um cliente, etc).
 -   Recomenda-se proteger as rotas com autenticação e autorização para uso em produção.
-
----
-
-Se precisar de exemplos de requisição ou mais detalhes sobre o funcionamento de cada endpoint, consulte a documentação dos controllers ou peça exemplos específicos.
-
--   **[64 Robots](https://64robots.com)**
--   **[Curotec](https://www.curotec.com/services/technologies/laravel)**
--   **[DevSquad](https://devsquad.com/hire-laravel-developers)**
--   **[Redberry](https://redberry.international/laravel-development)**
--   **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
