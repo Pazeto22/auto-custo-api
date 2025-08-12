@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class User extends Authenticatable
 {
-    protected $fillable = ['workshop_id', 'name', 'phone', 'rank', 'email', 'password'];
+    protected $fillable = ['workshop_id', 'name', 'phone', 'rank', 'more_information', 'email', 'password'];
 
     protected $hidden = ['password'];
 

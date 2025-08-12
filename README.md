@@ -1,48 +1,125 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# AutoCusto - Sistema de Orçamentos para Oficinas Mecânicas
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Descrição
 
-## About Laravel
+O AutoCusto é um sistema web desenvolvido em Laravel para auxiliar oficinas mecânicas na criação, organização e gestão de orçamentos de serviços e peças. O sistema foi pensado para ser simples, seguro e escalável, permitindo que o dono da oficina controle clientes, veículos, produtos, orçamentos e seus itens de forma eficiente.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Premissas do Projeto
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   Cada oficina (workshop) possui seus próprios usuários e clientes.
+-   Usuários só visualizam e gerenciam dados da sua própria oficina.
+-   Veículos pertencem a clientes, que por sua vez pertencem a uma oficina.
+-   Orçamentos pertencem a um cliente, veículo e usuário (quem criou/enviou).
+-   Itens de orçamento (BudgetItem) só existem dentro de um orçamento.
+-   Produtos podem ser serviços ou peças.
+-   Todas as operações são feitas via API RESTful.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Rotas e Endpoints
 
-## Learning Laravel
+### Oficinas (Workshops)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+-   `GET    /api/workshops` — Lista oficinas
+-   `POST   /api/workshops` — Cria oficina
+-   `GET    /api/workshops/{workshop}` — Detalha oficina
+-   `PUT    /api/workshops/{workshop}` — Atualiza oficina
+-   `DELETE /api/workshops/{workshop}` — Remove oficina
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Usuários (Users) — Aninhado em Workshop
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-   `GET    /api/workshops/{workshop}/users` — Lista usuários da oficina
+-   `POST   /api/workshops/{workshop}/users` — Cria usuário na oficina
+-   `GET    /api/workshops/{workshop}/users/{user}` — Detalha usuário
+-   `PUT    /api/workshops/{workshop}/users/{user}` — Atualiza usuário
+-   `DELETE /api/workshops/{workshop}/users/{user}` — Remove usuário
 
-## Laravel Sponsors
+#### Filtros e buscas:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+-   `?q=termo` — Busca por nome, email ou telefone
+-   `?per_page=10` — Paginação
 
-### Premium Partners
+### Clientes (Clients) — Aninhado em Workshop
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+-   `GET    /api/workshops/{workshop}/clients` — Lista clientes da oficina
+-   `POST   /api/workshops/{workshop}/clients` — Cria cliente
+-   `GET    /api/workshops/{workshop}/clients/{client}` — Detalha cliente
+-   `PUT    /api/workshops/{workshop}/clients/{client}` — Atualiza cliente
+-   `DELETE /api/workshops/{workshop}/clients/{client}` — Remove cliente
+
+#### Filtros e buscas:
+
+-   `?q=termo` — Busca por nome, telefone ou email
+-   `?per_page=10` — Paginação
+
+### Veículos (Vehicles) — Aninhado em Client
+
+-   `GET    /api/clients/{client}/vehicles` — Lista veículos do cliente
+-   `POST   /api/clients/{client}/vehicles` — Cria veículo
+-   `GET    /api/clients/{client}/vehicles/{vehicle}` — Detalha veículo
+-   `PUT    /api/clients/{client}/vehicles/{vehicle}` — Atualiza veículo
+-   `DELETE /api/clients/{client}/vehicles/{vehicle}` — Remove veículo
+
+#### Filtros e buscas:
+
+-   `?q=termo` — Busca por marca, modelo ou placa
+-   `?per_page=10` — Paginação
+
+### Produtos (Products)
+
+-   `GET    /api/products` — Lista produtos
+-   `POST   /api/products` — Cria produto
+-   `GET    /api/products/{product}` — Detalha produto
+-   `PUT    /api/products/{product}` — Atualiza produto
+-   `DELETE /api/products/{product}` — Remove produto
+
+#### Filtros e buscas:
+
+-   `?q=termo` — Busca por nome ou descrição
+-   `?type=service|part` — Filtra por tipo
+-   `?min_price=valor` — Preço mínimo
+-   `?max_price=valor` — Preço máximo
+-   `?per_page=10` — Paginação
+
+### Orçamentos (Budgets)
+
+-   `GET    /api/budgets` — Lista orçamentos
+-   `POST   /api/budgets` — Cria orçamento
+-   `GET    /api/budgets/{budget}` — Detalha orçamento (inclui cliente, veículo, usuário e itens)
+-   `PUT    /api/budgets/{budget}` — Atualiza orçamento
+-   `DELETE /api/budgets/{budget}` — Remove orçamento
+
+#### Filtros e buscas:
+
+-   `?client_id=ID` — Filtra por cliente
+-   `?vehicle_id=ID` — Filtra por veículo
+-   `?user_id=ID` — Filtra por usuário
+-   `?status=sketch|pending|approved|rejected` — Filtra por status
+-   `?q=termo` — Busca por texto em more_information
+-   `?per_page=10` — Paginação
+
+### Itens do Orçamento (Budget Items) — Aninhado em Budget
+
+-   `GET    /api/budgets/{budget}/items` — Lista itens do orçamento
+-   `POST   /api/budgets/{budget}/items` — Cria item
+-   `GET    /api/budgets/{budget}/items/{item}` — Detalha item
+-   `PUT    /api/budgets/{budget}/items/{item}` — Atualiza item
+-   `DELETE /api/budgets/{budget}/items/{item}` — Remove item
+
+## Observações
+
+-   Todas as rotas retornam JSON.
+-   Todas as operações de criação e atualização validam os dados enviados.
+-   Os relacionamentos são respeitados em todas as operações (ex: só é possível acessar clientes de uma oficina, veículos de um cliente, etc).
+-   Recomenda-se proteger as rotas com autenticação e autorização para uso em produção.
+
+---
+
+Se precisar de exemplos de requisição ou mais detalhes sobre o funcionamento de cada endpoint, consulte a documentação dos controllers ou peça exemplos específicos.
+
+-   **[64 Robots](https://64robots.com)**
+-   **[Curotec](https://www.curotec.com/services/technologies/laravel)**
+-   **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+-   **[Redberry](https://redberry.international/laravel-development)**
+-   **[Active Logic](https://activelogic.com)**
 
 ## Contributing
 

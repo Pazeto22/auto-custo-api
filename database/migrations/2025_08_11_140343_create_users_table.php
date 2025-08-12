@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('rank', ['master', 'adm', 'MOD', 'default'])->default('default');
             $table->text('more_information')->nullable();
             $table->string('email')->unique();
-            $table->string('password')->encrypted();
+            $table->string('password');
             $table->timestamps();
         });
     }

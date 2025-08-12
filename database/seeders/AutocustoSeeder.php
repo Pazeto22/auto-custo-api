@@ -18,6 +18,7 @@ class AutocustoSeeder extends Seeder
     // Criar oficina
     $workshop = Workshop::create([
       'name' => 'AutoCusto Oficina',
+      'email' => 'autocusto@oficina.com.br',
       'phone' => '11999999999',
       'address' => 'Rua das Flores, 123',
     ]);
@@ -35,6 +36,7 @@ class AutocustoSeeder extends Seeder
 
     // Criar cliente
     $client = Client::create([
+      'workshop_id' => $workshop->id,
       'name' => 'João',
       'phone' => '123456789',
       'email' => 'joao@email.com',

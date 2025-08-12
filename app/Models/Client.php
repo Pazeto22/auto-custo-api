@@ -10,7 +10,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Client extends Model
 {
-    protected $fillable = ['name', 'phone', 'email', 'address', 'notes'];
+    protected $fillable = [
+        'workshop_id',
+        'name',
+        'phone',
+        'email',
+        'address',
+        'more_information'
+    ];
 
     public function vehicles(): HasMany
     {
@@ -20,5 +27,10 @@ class Client extends Model
     public function budgets(): HasMany
     {
         return $this->hasMany(Budget::class);
+    }
+
+    public function workshop()
+    {
+        return $this->belongsTo(Workshop::class);
     }
 }

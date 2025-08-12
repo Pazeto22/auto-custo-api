@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Workshop extends Model
 {
-    protected $fillable = ['name', 'phone', 'address'];
+    protected $fillable = ['name', 'email', 'phone', 'address'];
 
     public function users(): HasMany
     {
